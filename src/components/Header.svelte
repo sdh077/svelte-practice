@@ -2,11 +2,18 @@
 	const navs = [
 		{
 			title: 'ToDo',
-			link: 'todo'
+			link: 'todo',
+			child: []
 		},
 		{
 			title: '사진첩',
-			link: 'gallery'
+			link: 'gallery',
+			child: [
+				{
+					title: '사진첩',
+					link: 'gallery'
+				}
+			]
 		}
 	];
 </script>
@@ -21,21 +28,61 @@
 		<div class="hidden lg:block">
 			<ul class="flex flex-row items-center justify-center font-semibold tracking-wide">
 				{#each navs as nav}
-					<li class="hoverable mx-1 svelte-bmrkxt">
-						<div
-							class="itmes-center relative flex h-20 shrink-0 justify-center whitespace-nowrap border-b-4 border-transparent p-2 font-medium uppercase hover:border-yellow-500           "
-						>
-							<a
-								href={nav.link}
-								aria-label="Click to route into category related products page"
-								data-sveltekit-reload=""
-								class="flex w-full items-center gap-1"
-								><span>{nav.title}</span>
-							</a>
-						</div>
+					<li
+						class="hoverable mx-1 svelte-bmrkxt"
+						id="menu-button"
+						aria-expanded="true"
+						aria-haspopup="true"
+					>
+						{#if !nav.child.length}
+							<div
+								class="itmes-center relative flex h-20 shrink-0 justify-center whitespace-nowrap border-b-4 border-transparent p-2 font-medium uppercase hover:border-yellow-500           "
+								id="dropdownMenuButton1"
+								data-te-dropdown-toggle-ref
+								aria-expanded="false"
+								data-te-ripple-init
+							>
+								<a
+									href={nav.link}
+									aria-label="Click to route into category related products page"
+									data-sveltekit-reload=""
+									class="flex w-full items-center gap-1"
+									><span>{nav.title}</span>
+								</a>
+							</div>
+						{:else}
+							<div class="dropdown">
+								<span>{nav.title}</span>
+								<div class="dropdown-content">
+									{#each nav.child as item}
+										<p><a href={item.link}>{item.title}</a></p>
+									{/each}
+								</div>
+							</div>
+						{/if}
 					</li>
 				{/each}
 			</ul>
 		</div>
 	</div>
 </nav>
+
+<style>
+	.dropdown {
+		position: relative;
+		display: inline-block;
+	}
+
+	.dropdown-content {
+		display: none;
+		position: absolute;
+		padding: 12px 16px;
+		z-index: 1;
+		min-width: 160px;
+		background-color: #f9f9f9;
+	}
+
+	.dropdown:hover .dropdown-content {
+		display: block;
+	}
+</style>
