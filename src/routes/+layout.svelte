@@ -6,7 +6,7 @@
 	import 'flowbite/dist/flowbite.css';
 </script>
 
-<header />
+<Header />
 
 <div class="w-full px-4 mx-auto max-w-8xl">
 	<slot>
