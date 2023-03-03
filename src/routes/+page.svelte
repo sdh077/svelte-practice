@@ -1,10 +1,8 @@
-<h1 class="text-3xl font-bold underline">
-	Hello world!
-	<button class="bg-sky-500 hover:bg-sky-700 ..."> Save changes </button>
-</h1>
+<script>
+	import bg1 from '$lib/carousel/1.webp';
+	import Breadcrumb from '$components/Breadcrumb/Breadcrumb.svelte';
+	import Carousel from '$components/Carousel/Carousel.svelte';
+</script>
 
-<style lang="postcss">
-	:global(html) {
-		background-color: theme(colors.gray.100);
-	}
-</style>
+<Breadcrumb />
+<Carousel />

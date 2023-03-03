@@ -18,47 +18,40 @@
 	];
 </script>
 
-<nav
-	class="minimum-width-rem inset-x-0 top-0 flex h-14 w-full items-center justify-center border-b bg-white px-3 shadow-md sm:h-20 sm:px-10 z-40 delay-500 svelte-1482j9b"
->
-	<div class="flex w-full items-center justify-between gap-4 lg:gap-8">
-		<div class="flex items-center gap-4">
-			<a href="/" aria-label="Click to route home page" class="block shrink-0">Svelte Project</a>
-		</div>
-		<div class="hidden lg:block">
-			<ul class="flex flex-row items-center justify-center font-semibold tracking-wide">
+<nav class="navbar navbar-expand-lg navbar-light">
+	<div class="container position-relative">
+		<a class="navbar-brand" href="/">
+			Svelte Project
+		</a>
+		<div class="collapse navbar-collapse" id="mainNavbarTheme">
+			<ul class="navbar-nav ms-auto">
 				{#each navs as nav}
-					<li
-						class="hoverable mx-1 svelte-bmrkxt"
-						id="menu-button"
-						aria-expanded="true"
-						aria-haspopup="true"
-					>
-						{#if !nav.child.length}
-							<div
-								class="itmes-center relative flex h-20 shrink-0 justify-center whitespace-nowrap border-b-4 border-transparent p-2 font-medium uppercase hover:border-yellow-500           "
-								id="dropdownMenuButton1"
-								data-te-dropdown-toggle-ref
+					<li class="nav-item dropdown">
+						{#if nav.child.length}
+							<a
+								class="nav-link dropdown-toggle "
+								href={nav.link}
+								role="button"
+								data-bs-toggle="dropdown"
+								aria-haspopup="true"
 								aria-expanded="false"
-								data-te-ripple-init
-							>
-								<a
-									href={nav.link}
-									aria-label="Click to route into category related products page"
-									data-sveltekit-reload=""
-									class="flex w-full items-center gap-1"
-									><span>{nav.title}</span>
-								</a>
-							</div>
-						{:else}
-							<div class="dropdown">
-								<span>{nav.title}</span>
-								<div class="dropdown-content">
-									{#each nav.child as item}
-										<p><a href={item.link}>{item.title}</a></p>
-									{/each}
+								>{nav.title}
+							</a>
+							<div class="dropdown-menu dropdown-menu-md dropdown-menu-start py-0 pe-lg-0">
+								<div class="overflow-hidden rounded-end">
+									<div class="row mx-0">
+										<div class="col-lg-5 position-relative">
+											<div class="py-1 py-lg-3 d-lg-flex flex-column">
+												{#each nav.child as item}
+													<a href={item.link} class="dropdown-item">{item.title}</a>
+												{/each}
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+						{:else}
+							<a class="nav-link" href={nav.link} role="button">{nav.title} </a>
 						{/if}
 					</li>
 				{/each}
@@ -66,23 +59,3 @@
 		</div>
 	</div>
 </nav>
-
-<style>
-	.dropdown {
-		position: relative;
-		display: inline-block;
-	}
-
-	.dropdown-content {
-		display: none;
-		position: absolute;
-		padding: 12px 16px;
-		z-index: 1;
-		min-width: 160px;
-		background-color: #f9f9f9;
-	}
-
-	.dropdown:hover .dropdown-content {
-		display: block;
-	}
-</style>
